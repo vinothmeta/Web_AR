@@ -1,0 +1,33 @@
+<html>
+
+<head>
+  <!-- <script src="../../static/js/aframe-master.min.js"></script>
+<script src="../../static/js/aframe-ar-nft.js"></script> -->
+  <script src="jquery.min.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+
+      var urlParams = new URLSearchParams(window.location.search);
+      var url = "ar.html?scale=" + urlParams.get('scale');
+      url += "&nft=" + urlParams.get('nft');;
+      url += "&entity=" + urlParams.get('entity');;
+      $('#iframe').attr("src", url);
+
+
+      $("#move").click(function () {
+        alert("Move clicked")
+      })
+    })
+  </script>
+
+</head>
+
+<body style="margin : 0px; overflow: hidden; background: rgba(53,54,58,1);">
+  <button id="move">Move</button>
+  <iframe id="iframe" src="" scrolling="no" style="height: 100%; width: 100%; margin: 0 auto; display: block;"
+    frameBorder="0"></iframe>
+</body>
+
+</html>

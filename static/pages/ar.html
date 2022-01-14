@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <script src="aframe-master.min.js"></script>
+    <script src="aframe-ar-nft.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
+    <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            $("#entity").attr("scale", urlParams.get('scale') + " " + urlParams.get('scale') + " " + urlParams.get('scale'))
+            $("#nft").attr("url", "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex")
+            $("#entity").attr("gltf-model", "https://arjs-cors-proxy.herokuapp.com/https://cdn.glitch.com/06bd98b4-97ee-4c07-a546-fe39ca205034%2Fbowser.glb")
+            $("#entity").attr("gesture-handler", "minScale: " + urlParams.get('scale') + "; maxScale: " + (urlParams.get('scale') + 10))
+        })
+    </script>
+</head>
+
+<body>
+    <!-- minimal loader shown until image descriptors are loaded -->
+    <div class="arjs-loader">
+        <div>Loading, please wait...</div>
+    </div>
+    <a-scene vr-mode-ui="enabled: false;" id="scene" renderer="logarithmicDepthBuffer: true;" gesture-detector embedded
+        arjs="trackingMethod: best; sourceType: webcam; displayWidth: 960; displayHeight: 640;debugUIEnabled: false;">
+        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
+        <a-nft id="nft" type="nft" url="" smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5"
+            raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
+            <a-entity id="entity" gltf-model="" scale="" position="100 -500 0" class="clickable" gesture-handler="">
+            </a-entity>
+        </a-nft>
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+
+</html>
