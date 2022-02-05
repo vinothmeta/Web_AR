@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="bootstrap.min.css">
   <script src="bootstrap.min.js"></script>
 
-
-  ?nft=https%3A%2F%2Farjs-cors-proxy.herokuapp.com%2Fhttps%3A%2F%2Fraw.githack.com%2Fvinothmeta%2FWeb_AR%2Fmain%2Fstatic%2Fmarker%2Fpepe&entity=https%3A%2F%2Farjs-cors-proxy.herokuapp.com%2Fhttps%3A%2F%2Fgithub.com%2FKhronosGroup%2FglTF-Sample-Models%2Fblob%2Fmaster%2F2.0%2FCesiumMan%2FglTF-Embedded%2FCesiumMan.gltf%3Fraw%3Dtrue&positionX=200&positionY=-350&positionZ=0&scale=100
-
   <script>
     var url = "";
     var positionX;
@@ -23,17 +20,12 @@
 
       var urlParams = new URLSearchParams(window.location.search);
       url = "ar.html"
-      // ?scale=" + urlParams.get('scale');
-      // url += "&nft=" + urlParams.get('nft');
-      // url += "&entity=" + urlParams.get('entity');
-      // url += "&nft=" + "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/vinothmeta/Web_AR/main/static/marker/pepe"
-      // url += "&entity=" + "https://arjs-cors-proxy.herokuapp.com/https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/CesiumMan/glTF-Embedded/CesiumMan.gltf?raw=true"
-      nft = "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/vinothmeta/Web_AR/main/static/marker/pepe";
-      entity = "https://arjs-cors-proxy.herokuapp.com/https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/CesiumMan/glTF-Embedded/CesiumMan.gltf?raw=true";
-      positionX = 200;
-      positionY = -350;
-      positionZ = 0;
-      scale = 100;
+      nft = urlParams.get('nft');
+      entity = urlParams.get('entity');
+      positionX = urlParams.get('positionX');
+      positionY = urlParams.get('positionY');
+      positionZ = urlParams.get('positionZ');
+      scale = urlParams.get('scale');
 
       $("#xRange").val(positionX);
       $("#yRange").val(positionY);
