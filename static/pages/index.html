@@ -3,31 +3,150 @@
 <head>
   <!-- <script src="../../static/js/aframe-master.min.js"></script>
 <script src="../../static/js/aframe-ar-nft.js"></script> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="jquery.min.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <script src="bootstrap.min.js"></script>
 
   <script>
-
+    var url = "";
+    var positionX;
+    var positionY;
+    var positionZ;
+    var scale;
+    var nft;
+    var entity;
     $(document).ready(function () {
 
       var urlParams = new URLSearchParams(window.location.search);
-      var url = "ar.html?scale=" + urlParams.get('scale');
-      url += "&nft=" + urlParams.get('nft');;
-      url += "&entity=" + urlParams.get('entity');;
-      $('#iframe').attr("src", url);
+      url = "ar.html"
+      // ?scale=" + urlParams.get('scale');
+      // url += "&nft=" + urlParams.get('nft');
+      // url += "&entity=" + urlParams.get('entity');
+      // url += "&nft=" + "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/vinothmeta/Web_AR/main/static/marker/pepe"
+      // url += "&entity=" + "https://arjs-cors-proxy.herokuapp.com/https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/CesiumMan/glTF-Embedded/CesiumMan.gltf?raw=true"
+      nft = "https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/vinothmeta/Web_AR/main/static/marker/pepe";
+      entity = "https://arjs-cors-proxy.herokuapp.com/https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/CesiumMan/glTF-Embedded/CesiumMan.gltf?raw=true";
+      positionX = 200;
+      positionY = -350;
+      positionZ = 0;
+      scale = 100;
 
+      $("#xRange").val(positionX);
+      $("#yRange").val(positionY);
+      $("#zRange").val(positionZ);
+      $("#scale").val(scale);
 
-      $("#move").click(function () {
-        alert("Move clicked")
+      $("#positionXValue").text(positionX);
+      $("#positionYValue").text(positionY);
+      $("#positionZValue").text(positionZ);
+      $("#scaleValue").text(scale);
+
+      createUrl(url, nft, entity, positionX, positionY, positionZ, scale);
+
+      $("#xRange").on('propertychange input', function (e) {
+        $("#positionXValue").text($(this).val());
+      })
+
+      $("#yRange").on('propertychange input', function (e) {
+        $("#positionYValue").text($(this).val());
+      })
+
+      $("#zRange").on('propertychange input', function (e) {
+        $("#positionZValue").text($(this).val());
+      })
+
+      $("#scale").on('propertychange input', function (e) {
+        $("#scaleValue").text($(this).val());
+      })
+
+      $("#xRange").change(function () {
+        positionX = ($(this).val());
+        $("#positionXValue").text(positionX);
+        createUrl(url, nft, entity, positionX, positionY, positionZ, scale);
+      })
+
+      $("#yRange").change(function () {
+        positionY = ($(this).val());
+        $("#positionYValue").text(positionY);
+        createUrl(url, nft, entity, positionX, positionY, positionZ, scale);
+      })
+
+      $("#zRange").change(function () {
+        positionZ = ($(this).val());
+        $("#positionZValue").text(positionZ);
+        createUrl(url, nft, entity, positionX, positionY, positionZ, scale);
+      })
+
+      $("#scale").change(function () {
+        scale = ($(this).val());
+        $("#scaleValue").text(scale);
+        createUrl(url, nft, entity, positionX, positionY, positionZ, scale);
       })
     })
-  </script>
 
+    function createUrl(url, nft, entity, positionX, positionY, positionZ, scale) {
+      var iframeUrl = url;
+      iframeUrl += "?nft=" + nft;
+      iframeUrl += "&entity=" + entity;
+      iframeUrl += "&position=" + positionX + " " + positionY + " " + positionZ;
+      iframeUrl += "&scale=" + scale;
+      $('#iframe').attr("src", iframeUrl);
+    }
+  </script>
 </head>
 
-<body style="margin : 0px; overflow: hidden; background: rgba(53,54,58,1);">
-  <button id="move">Move</button>
+<body style="background: rgba(53,54,58,1); padding: 0 !important;" class="container-fluid">
+  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="position: absolute; top: 0; color: #fff; width: 100%;">
+    <nav class="navbar" role="navigation">
+      <div class="navbar-header">
+        <div style="display: inline-block;">
+          <img src="logo.png" style="height: 30px; width: 40px;">
+          <b style="font-size: 16px;">AR VIEWER |</b>
+        </div>
+        <div style="display: inline-block;">
+          <i> <a style="color: yellow" href="https://twitter.com/vinoth23550906">VINOTH</a></i>
+        </div><br/>
+        <div style="display: inline-block; font-size: 12px;">
+          <p>
+            Touchscreen supports rotate, pinch and zoom on 3d model
+          </p>
+        </div>
+      </div>
+    </nav>
+  </div>
   <iframe id="iframe" src="" scrolling="no" style="height: 100%; width: 100%; margin: 0 auto; display: block;"
     frameBorder="0"></iframe>
+  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 form-inline" style="position: absolute; bottom: 20px;">
+    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+      <div style="margin: 10px 0px 10px 0px;">
+        <label class="label label-primary">Position X</label>
+        <label id="positionXValue" class="label label-success pull-right">0</label>
+      </div>
+      <input type="range" min="-500" max="500" value="0" class="slider" id="xRange">
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+      <div style="margin: 10px 0px 10px 0px;">
+        <label class="label label-primary">Position Y</label>
+        <label id="positionYValue" class="label label-success pull-right">0</label>
+      </div>
+      <input type="range" min="-500" max="500" value="0" class="slider" id="yRange">
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6">
+      <div style="margin: 10px 0px 10px 0px;">
+        <label class="label label-primary">Position Z</label>
+        <label id="positionZValue" class="label label-success pull-right">0</label>
+      </div>
+      <input type="range" min="-500" max="500" value="0" class="slider" id="zRange">
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6 col-lg-6 py-3">
+      <div style="margin: 10px 0px 10px 0px;">
+        <label class="label label-primary">Size</label>
+        <label id="scaleValue" class="label label-success pull-right">0</label>
+      </div>
+      <input type="range" min="0" max="200" value="0" class="slider" id="scale">
+    </div>
+  </div>
 </body>
 
 </html>
