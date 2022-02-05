@@ -108,7 +108,6 @@
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
-    <!-- minimal loader shown until image descriptors are loaded -->
     <div class="arjs-loader">
         <div class="loading">
             <div class="loader"></div>Loading
@@ -116,7 +115,6 @@
     </div>
     <a-scene vr-mode-ui="enabled: false;" id="scene" renderer="logarithmicDepthBuffer: true;" gesture-detector embedded
         arjs="trackingMethod: best; sourceType: webcam; displayWidth: 960; displayHeight: 640;debugUIEnabled: false;">
-        <!-- we use cors proxy to avoid cross-origin problems ATTENTION! you need to set up your server -->
         <a-nft id="nft" type="nft" url="" smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5"
             raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;">
             <a-entity id="entity" animation-mixer gltf-model="" scale="" shadow="receive: true" position="200 -350 0"
